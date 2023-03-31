@@ -1,12 +1,13 @@
 <script lang="ts" setup>
+const title = ref('first title')
 const [
   FirstModal,
   { isRevealed: firstIsRevealed, cancel: cancelFirst, reveal: revealFirst },
-] = useConfirmModal({ title: "first modal" });
+] = useConfirmModal({ title });
 const [
   SecondModal,
   { isRevealed: secondIsRevealed, cancel: cancelSecond, reveal: revealSecond },
-] = useConfirmModal({ title: "second modal" });
+] = useConfirmModal({ title: "second title" });
 const [
   ThirdModal,
   { isRevealed: thirdIsRevealed, cancel: cancelThird, reveal: revealThird },
@@ -15,13 +16,13 @@ const [
 function handleToggle(str: string) {
   switch (str) {
     case "first":
-      firstIsRevealed.value ? cancelFirst() : revealFirst();
+      firstIsRevealed.value ? cancelFirst() : revealFirst().then(console.log);
       break;
     case "second":
-      secondIsRevealed.value ? cancelSecond() : revealSecond();
+      secondIsRevealed.value ? cancelSecond() : revealSecond().then(console.log);
       break;
     case "third":
-      thirdIsRevealed.value ? cancelThird() : revealThird();
+      thirdIsRevealed.value ? cancelThird() : revealThird().then(console.log);
       break;
   }
 }
@@ -30,6 +31,10 @@ function handleToggle(str: string) {
   <Body class="m-8 bg-gray-100 font-sans" />
   <div class="bg-gray-100 h-screen">
     <div>first modal revealed?: {{ firstIsRevealed }}</div>
+    <label>
+      First modal title
+      <input type="text" v-model="title">
+    </label>
     <button @click="() => handleToggle('first')">Toggle first Modal</button>
     <div>second modal revealed?: {{ secondIsRevealed }}</div>
     <button @click="() => handleToggle('second')">Toggle second Modal</button>

@@ -8,7 +8,7 @@ const props = withDefaults(
 </script>
 <template>
   <div v-if="modalProps.isRevealed.value" class="p-8 bg-white border-solid rounded border border-gray-700">
-    <div>{{ title }} {{ modalProps.isRevealed }}</div>
+    <div>{{ title }}</div>
     <button @click="modalProps.cancel('cancelled')">Cancel modal</button>
     <button @click="modalProps.confirm('confirmed')">Confirm modal</button>
   </div>
